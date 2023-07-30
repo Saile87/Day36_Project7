@@ -7,34 +7,65 @@
 
 import SwiftUI
 
-struct SecondView: View {
-    
-    @Environment(\.dismiss) var dismiss
-    
-    let name: String
-    
-    var body: some View {
-//        Text("Hello, \(name)")
-        Button("Dismiss") {
-            dismiss()
-        }
-    }
-}
-
 struct ContentView: View {
-    
-    @State private var showingSheet = false
+    @State private var number = [Int]()
+    @State private var currentNumber = 1
     
     var body: some View {
-        Button("Show Sheet") {
-            showingSheet.toggle()
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(number, id: \.self) {
+                        Text("Row \($0)")
+                    }
+                    .onDelete(perform: removeRows)
+                }
+                Button("Add Number") {
+                    number.append(currentNumber)
+                    currentNumber += 1
+                }
+            }
+            .navigationTitle("onDelete")
+            .toolbar {
+                EditButton()
+            }
         }
-        .sheet(isPresented: $showingSheet) {
-            SecondView(name: "Elias")
-        }
+    }
+    func removeRows(at offsets: IndexSet) {
+        number.remove(atOffsets: offsets)
     }
 }
 
+
+//____________________________________________________________________
+//struct SecondView: View {
+//
+//    @Environment(\.dismiss) var dismiss
+//
+//    let name: String
+//
+//    var body: some View {
+////        Text("Hello, \(name)")
+//        Button("Dismiss") {
+//            dismiss()
+//        }
+//    }
+//}
+//
+//struct ContentView: View {
+//
+//    @State private var showingSheet = false
+//
+//    var body: some View {
+//        Button("Show Sheet") {
+//            showingSheet.toggle()
+//        }
+//        .sheet(isPresented: $showingSheet) {
+//            SecondView(name: "Elias")
+//        }
+//    }
+//}
+//____________________________________________________________________
 //class User: ObservableObject {
 //    @Published var firstName = "Elias"
 //    @Published var lastName = "Breitenbach"
@@ -52,7 +83,7 @@ struct ContentView: View {
 //        }
 //    }
 //}
-
+//____________________________________________________________________
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
