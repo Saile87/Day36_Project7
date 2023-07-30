@@ -8,34 +8,49 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var number = [Int]()
-    @State private var currentNumber = 1
+    
+    //    @State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
+    @AppStorage("tapCount") private var tapCount = 0
     
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    ForEach(number, id: \.self) {
-                        Text("Row \($0)")
-                    }
-                    .onDelete(perform: removeRows)
-                }
-                Button("Add Number") {
-                    number.append(currentNumber)
-                    currentNumber += 1
-                }
-            }
-            .navigationTitle("onDelete")
-            .toolbar {
-                EditButton()
-            }
+        Button("Tap count: \(tapCount)") {
+            tapCount += 1
+            //            UserDefaults.standard.set(self.tapCount, forKey: "Tap")
         }
-    }
-    func removeRows(at offsets: IndexSet) {
-        number.remove(atOffsets: offsets)
     }
 }
 
+//____________________________________________________________________
+
+//struct ContentView: View {
+//    @State private var number = [Int]()
+//    @State private var currentNumber = 1
+//
+//    var body: some View {
+//        NavigationView {
+//            VStack {
+//                List {
+//                    ForEach(number, id: \.self) {
+//                        Text("Row \($0)")
+//                    }
+//                    .onDelete(perform: removeRows)
+//                }
+//                Button("Add Number") {
+//                    number.append(currentNumber)
+//                    currentNumber += 1
+//                }
+//            }
+//            .navigationTitle("onDelete")
+//            .toolbar {
+//                EditButton()
+//            }
+//        }
+//    }
+//    func removeRows(at offsets: IndexSet) {
+//        number.remove(atOffsets: offsets)
+//    }
+//}
+//____________________________________________________________________
 
 //____________________________________________________________________
 //struct SecondView: View {
