@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-struct User: Codable {
-    let firstName: String
-    let lastName: String
-}
-
-struct ContentView: View {
-    
-    @State private var user = User(firstName: "Taylor", lastName: "Swift" )
-    
-    var body: some View {
-        Button("Save User") {
-            let encoder = JSONEncoder()
-            
-            if let data = try? encoder.encode(user) {
-                UserDefaults.standard.set(data, forKey: "UserData")
-            }
-        }
-    }
-}
+//struct User: Codable {
+//    let firstName: String
+//    let lastName: String
+//}
+//
+//struct ContentView: View {
+//    
+//    @State private var user = User(firstName: "Taylor", lastName: "Swift" )
+//    
+//    var body: some View {
+//        Button("Save User") {
+//            let encoder = JSONEncoder()
+//            
+//            if let data = try? encoder.encode(user) {
+//                UserDefaults.standard.set(data, forKey: "UserData")
+//            }
+//        }
+//    }
+//}
     
     //____________________________________________________________________
 //
@@ -42,34 +42,34 @@ struct ContentView: View {
 
 //____________________________________________________________________
 
-//struct ContentView: View {
-//    @State private var number = [Int]()
-//    @State private var currentNumber = 1
-//
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                List {
-//                    ForEach(number, id: \.self) {
-//                        Text("Row \($0)")
-//                    }
-//                    .onDelete(perform: removeRows)
-//                }
-//                Button("Add Number") {
-//                    number.append(currentNumber)
-//                    currentNumber += 1
-//                }
-//            }
-//            .navigationTitle("onDelete")
-//            .toolbar {
-//                EditButton()
-//            }
-//        }
-//    }
-//    func removeRows(at offsets: IndexSet) {
-//        number.remove(atOffsets: offsets)
-//    }
-//}
+struct ContentView: View {
+    @State private var number = [Int]()
+    @State private var currentNumber = 1
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(number, id: \.self) {
+                        Text("Row \($0)")
+                    }
+                    .onDelete(perform: removeRows)
+                }
+                Button("Add Number") {
+                    number.append(currentNumber)
+                    currentNumber += 1
+                }
+            }
+            .navigationTitle("onDelete")
+            .toolbar {
+                EditButton()
+            }
+        }
+    }
+    func removeRows(at offsets: IndexSet) {
+        number.remove(atOffsets: offsets)
+    }
+}
 //____________________________________________________________________
 
 //____________________________________________________________________
